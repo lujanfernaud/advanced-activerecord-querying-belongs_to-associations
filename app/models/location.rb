@@ -3,6 +3,10 @@ class Location < ActiveRecord::Base
   has_many :people
 
   def self.in_region(region)
-    all
+    self.region.where("regions.name LIKE ?", "%#{region}%")
+  end
+
+  def self.region
+    joins(:region)
   end
 end
